@@ -1,0 +1,9 @@
+import { PrismaUsersRepository } from '../repositories/prisma/PrismaUsersRepository'
+import { CreateUserUseCase } from '../useCases/CreateUserUseCase'
+
+export function makeCreateUserUseCase(): CreateUserUseCase {
+  const usersRepository = new PrismaUsersRepository()
+  const createUserUseCase = new CreateUserUseCase(usersRepository)
+
+  return createUserUseCase
+}
