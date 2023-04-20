@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 
 import { CreateUserUseCase } from './CreateUserUseCase'
 import { UsersRepositoryInMemory } from '../repositories/in-memory/UsersRepositoryInMemory'
+import { compare } from 'bcryptjs'
 
 let usersRepository: UsersRepositoryInMemory
 let sut: CreateUserUseCase
@@ -37,5 +38,20 @@ describe('Create User Use Case', () => {
         password: '123456',
       }),
     ).rejects.toBeInstanceOf(Error)
+  })
+
+  it('should hash user password upon registration', async () => {
+    const { user } = await sut.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    const isPasswordCorrectlyHashed = await compare(
+      '123456',
+      user.password_hash,
+    )
+
+    expect(isPasswordCorrectlyHashed).toBe(true)
   })
 })
