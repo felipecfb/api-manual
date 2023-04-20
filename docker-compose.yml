@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  api-manual:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=manual
+      - POSTGRESQL_PASSWORD=manual
+      - POSTGRESQL_DATABASE=api-manual
