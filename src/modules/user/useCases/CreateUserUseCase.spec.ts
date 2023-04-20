@@ -22,4 +22,20 @@ describe('Create User Use Case', () => {
     expect(user).toHaveProperty('id', user.id)
     expect(user).toHaveProperty('email', user.email)
   })
+
+  it('should not be able to create a new user with same email twice', async () => {
+    await sut.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    await expect(() =>
+      sut.execute({
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(Error)
+  })
 })

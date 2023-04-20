@@ -22,6 +22,12 @@ class CreateUserUseCase {
   }: ICreateUserUseCaseRequest): Promise<ICreateUserUseCaseResponse> {
     const password_hash = await hash(password, 6)
 
+    const userWithSameEmail = await this.usersRepository.findUserByEmail(email)
+
+    if (userWithSameEmail) {
+      throw new Error('User already exists')
+    }
+
     const user = await this.usersRepository.create({
       name,
       email,
