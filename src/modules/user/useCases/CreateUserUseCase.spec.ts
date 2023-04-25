@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { CreateUserUseCase } from './CreateUserUseCase'
 import { UsersRepositoryInMemory } from '../repositories/in-memory/UsersRepositoryInMemory'
 import { compare } from 'bcryptjs'
+import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 
 let usersRepository: UsersRepositoryInMemory
 let sut: CreateUserUseCase
@@ -37,7 +38,7 @@ describe('Create User Use Case', () => {
         email: 'johndoe@example.com',
         password: '123456',
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
 
   it('should hash user password upon registration', async () => {
