@@ -3,6 +3,7 @@ import { ICategoriesRepository } from '../repositories/ICategoriesRepository'
 
 interface IFetchCategoriesUseCaseRequest {
   page: number
+  query?: string
 }
 
 interface IFetchCategoriesUseCaseResponse {
@@ -16,8 +17,12 @@ class FetchCategoriesUseCase {
 
   async execute({
     page,
+    query,
   }: IFetchCategoriesUseCaseRequest): Promise<IFetchCategoriesUseCaseResponse> {
-    const categories = await this.categoriesRepository.fetchCategories(page)
+    const categories = await this.categoriesRepository.fetchCategories(
+      page,
+      query,
+    )
 
     return {
       categories,

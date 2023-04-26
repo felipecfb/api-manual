@@ -4,6 +4,5 @@ export interface ICategoriesRepository {
   create(data: Prisma.CategoryCreateInput): Promise<Category>
   findById(id: string): Promise<Category | null>
   findBySlug(slug: string): Promise<Category | null>
-  fetchCategories(page: number): Promise<Category[]>
-  searchManyCategories(query: string, page: number): Promise<Category[]>
+  fetchCategories(page: number, query?: string): Promise<Category[]>
 }

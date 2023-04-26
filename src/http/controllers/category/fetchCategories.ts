@@ -10,15 +10,17 @@ export async function fetchCategories(
 ) {
   const fetchCategoriesQuerySchema = z.object({
     page: z.coerce.string(),
+    query: z.string().optional(),
   })
 
-  const { page } = fetchCategoriesQuerySchema.parse(request.query)
+  const { page, query } = fetchCategoriesQuerySchema.parse(request.query)
 
   try {
     const fetchCategoriesUseCase = makeFetchCategoriesUseCase()
 
     const { categories } = await fetchCategoriesUseCase.execute({
       page: Number(page),
+      query,
     })
 
     return reply.status(200).send({
