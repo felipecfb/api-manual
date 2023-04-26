@@ -1,8 +1,9 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { InvalidCredentialsError } from '../errors/invalidy-credentials-error'
-import { makeCreateUserUseCase } from '../factories/makeCreateUserUseCase'
-import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
+
+import { InvalidCredentialsError } from '@/modules/user/errors/invalidy-credentials-error'
+import { UserAlreadyExistsError } from '@/modules/user/errors/user-already-exists-error'
+import { makeCreateUserUseCase } from '@/modules/user/factories/makeCreateUserUseCase'
 
 export async function createUser(request: FastifyRequest, reply: FastifyReply) {
   const createUserBodySchema = z.object({

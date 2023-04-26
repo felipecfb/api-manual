@@ -1,7 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { InvalidCredentialsError } from '../errors/invalidy-credentials-error'
-import { makeAuthenticateUserUseCase } from '../factories/makeAuthenticateUserUseCase'
+
+import { InvalidCredentialsError } from '@/modules/user/errors/invalidy-credentials-error'
+import { makeAuthenticateUserUseCase } from '@/modules/user/factories/makeAuthenticateUserUseCase'
 
 export async function authenticateUser(
   request: FastifyRequest,

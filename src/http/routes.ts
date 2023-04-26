@@ -1,6 +1,7 @@
-import { authenticateUser } from '@/modules/user/controllers/authenticateUser'
-import { createUser } from '@/modules/user/controllers/createUser'
 import { FastifyInstance } from 'fastify'
+
+import { createUser } from './controllers/user/createUser'
+import { authenticateUser } from './controllers/user/authenticateUser'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', createUser)
