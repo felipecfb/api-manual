@@ -42,4 +42,28 @@ describe('Fetch Categories', () => {
 
     expect(categories.categories.length).toBe(2)
   })
+
+  it('should be able to search for categories', async () => {
+    await categoriesRepository.create({
+      id: 'search-category',
+      name: 'Search category',
+      slug: 'search-category',
+    })
+
+    await categoriesRepository.create({
+      id: 'category-2',
+      name: 'Category 2',
+      slug: 'category-2',
+    })
+
+    const { categories } = await sut.execute({
+      page: 1,
+      query: 'search',
+    })
+
+    expect(categories).toHaveLength(1)
+    expect(categories).toEqual([
+      expect.objectContaining({ name: 'Search category' }),
+    ])
+  })
 })

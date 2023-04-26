@@ -40,7 +40,7 @@ class PrismaCategoriesRepository implements ICategoriesRepository {
         },
       },
       take: 20,
-      skip: (page - 1) * 20,
+      skip: page ? (page - 1) * 20 : 0,
     })
 
     return categories

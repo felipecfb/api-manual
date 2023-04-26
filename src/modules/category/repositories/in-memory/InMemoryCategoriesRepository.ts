@@ -8,7 +8,7 @@ class InMemoryCategoriesRepository implements ICategoriesRepository {
   async fetchCategories(page: number, query: string): Promise<Category[]> {
     if (query) {
       return this.categories.filter((category) =>
-        category.name.includes(query.toLowerCase()),
+        category.name.toLowerCase().includes(query.toLowerCase()),
       )
     }
 
