@@ -5,6 +5,12 @@ import { randomUUID } from 'crypto'
 class InMemoryCategoriesRepository implements ICategoriesRepository {
   public categories: Category[] = []
 
+  async fetchCategories(page: number): Promise<Category[]> {
+    const categories = this.categories.splice((page - 1) * 20, page * 20)
+
+    return categories
+  }
+
   async findBySlug(slug: string): Promise<Category | null> {
     const category = this.categories.find((category) => category.slug === slug)
 
