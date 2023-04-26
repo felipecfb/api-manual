@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemorySeriesRepository } from '../in-memory/InMemorySeriesRepository'
 import { CreateSeriesUseCase } from './createSeries'
 import { CreateCategoryUseCase } from '@/modules/category/useCases/createCategory'
 import { InMemoryCategoriesRepository } from '@/modules/category/repositories/in-memory/InMemoryCategoriesRepository'
 import { CategoryNotExistsError } from '../errors/category-not-exists-error'
+import { InMemorySeriesRepository } from '../repositories/in-memory/InMemorySeriesRepository'
 
 let categoriesRepository: InMemoryCategoriesRepository
 let createCategory: CreateCategoryUseCase

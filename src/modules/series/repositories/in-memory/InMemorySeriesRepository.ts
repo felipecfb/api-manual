@@ -1,6 +1,6 @@
 import { Prisma, Series } from '@prisma/client'
-import { ISeriesRepository } from '../repositories/ISeriesRepository'
 import { randomUUID } from 'crypto'
+import { ISeriesRepository } from '../ISeriesRepository'
 
 class InMemorySeriesRepository implements ISeriesRepository {
   public series: Series[] = []
