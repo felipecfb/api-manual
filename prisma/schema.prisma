@@ -26,6 +26,20 @@ model Category {
   slug       String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  Series     Series[]
 
   @@map("categories")
+}
+
+model Series {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  category_id String
+  category    Category @relation(fields: [category_id], references: [id])
+
+  @@map("series")
 }
