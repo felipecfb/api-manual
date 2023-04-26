@@ -3,7 +3,17 @@ import { ISeriesRepository } from '../ISeriesRepository'
 import { prisma } from '@/lib/prisma'
 
 class PrismaSeriesRepository implements ISeriesRepository {
-  findBySlug(slug: string): Promise<Series | null> {
+  async findById(id: string): Promise<Series | null> {
+    const series = prisma.series.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return series
+  }
+
+  async findBySlug(slug: string): Promise<Series | null> {
     const series = prisma.series.findUnique({
       where: {
         slug: slug.toLowerCase().replace(' ', '-'),

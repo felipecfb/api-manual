@@ -5,6 +5,16 @@ import { ISeriesRepository } from '../ISeriesRepository'
 class InMemorySeriesRepository implements ISeriesRepository {
   public series: Series[] = []
 
+  async findById(id: string): Promise<Series | null> {
+    const series = this.series.find((series) => series.id === id)
+
+    if (!series) {
+      return null
+    }
+
+    return series
+  }
+
   async findBySlug(slug: string): Promise<Series | null> {
     const series = this.series.find(
       (series) => series.slug === slug.toLowerCase().replace(' ', '-'),
