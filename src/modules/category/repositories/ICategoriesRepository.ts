@@ -5,4 +5,5 @@ export interface ICategoriesRepository {
   findById(id: string): Promise<Category | null>
   findBySlug(slug: string): Promise<Category | null>
   fetchCategories(page: number): Promise<Category[]>
+  searchManyCategories(query: string, page: number): Promise<Category[]>
 }

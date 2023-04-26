@@ -29,7 +29,7 @@ describe('Fetch Categories', () => {
     expect(categories.categories.length).toBe(2)
   })
 
-  it('should be able to fetch all categories', async () => {
+  it('should be able to fetch paginated all categories', async () => {
     for (let i = 1; i <= 22; i++) {
       await categoriesRepository.create({
         id: `category-${i}`,
