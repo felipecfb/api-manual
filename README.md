@@ -1,15 +1,22 @@
 # App
 
-GymPass style app.
+Manual App
 
 ## RFs (Requisitos funcionais)
 
 - [x] Deve ser possível se cadastrar;
-- [ ] Deve ser possível se autenticar;
+- [x] Deve ser possível criar uma nova categoria;
+- [x] Deve ser possível criar uma nova série;
+- [x] Deve ser possível criar um novo produto;
 
 ## RNs (Regras de negócio)
 
 - [x] O usuário não deve poder se cadastrar com um e-mail duplicado;
+- [x] O usuário não deve poder criar uma categoria com o nome duplicado;
+- [x] O usuário não deve poder criar uma série com o nome duplicado;
+- [x] O usuário não deve poder criar uma série com um id de categoria inexistente;
+- [x] O usuário não deve poder criar um produto com o nome duplicado;
+- [x] O usuário não deve poder criar um produto com um id da série inexistente;
 
 ## RNFs (Requisitos não-funcionais)
 
