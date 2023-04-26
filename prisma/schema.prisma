@@ -39,7 +39,21 @@ model Series {
   updated_at DateTime @updatedAt
 
   category_id String
-  category    Category @relation(fields: [category_id], references: [id])
+  category    Category   @relation(fields: [category_id], references: [id])
+  Products    Products[]
 
   @@map("series")
+}
+
+model Products {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  series_id String
+  series    Series @relation(fields: [series_id], references: [id])
+
+  @@map("products")
 }
