@@ -1,9 +1,19 @@
 import { Prisma, Products } from '@prisma/client'
-import { IProductsRepository } from '../repositories/IProductsRepository'
 import { randomUUID } from 'crypto'
+import { IProductsRepository } from '../IProductsRepository'
 
 class InMemoryProductsRepository implements IProductsRepository {
   public products: Products[] = []
+
+  async findBySlug(slug: string): Promise<Products | null> {
+    const product = this.products.find((product) => product.slug === slug)
+
+    if (!product) {
+      return null
+    }
+
+    return product
+  }
 
   async create({
     name,
