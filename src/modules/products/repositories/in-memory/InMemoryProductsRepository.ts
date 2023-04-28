@@ -5,6 +5,14 @@ import { IProductsRepository } from '../IProductsRepository'
 class InMemoryProductsRepository implements IProductsRepository {
   public products: Products[] = []
 
+  async findBySeriesId(series_id: string): Promise<Products[]> {
+    const products = this.products.filter(
+      (product) => product.series_id === series_id,
+    )
+
+    return products
+  }
+
   async findBySlug(slug: string): Promise<Products | null> {
     const product = this.products.find((product) => product.slug === slug)
 
