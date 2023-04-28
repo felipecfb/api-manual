@@ -5,8 +5,6 @@ import { createSeries } from './createSeries'
 import { fetchSeries } from './fetchSeries'
 
 export async function seriesRoutes(app: FastifyInstance) {
-  app.addHook('onRequest', verifyJWT)
-
-  app.post('/series', createSeries)
+  app.post('/series', { onRequest: verifyJWT }, createSeries)
   app.get('/series', fetchSeries)
 }

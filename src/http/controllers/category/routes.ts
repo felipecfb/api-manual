@@ -6,8 +6,6 @@ import { createCategory } from './createCategory'
 import { fetchCategories } from './fetchCategories'
 
 export async function categoryRoutes(app: FastifyInstance) {
-  app.addHook('onRequest', verifyJWT)
-
   app.get('/categories', fetchCategories)
-  app.post('/categories', createCategory)
+  app.post('/categories', { onRequest: verifyJWT }, createCategory)
 }
