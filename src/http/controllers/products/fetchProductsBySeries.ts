@@ -17,13 +17,11 @@ export async function fetchProductsBySeries(
   try {
     const fetchProductsBySeries = makeFetchProductsBySeriesUseCase()
 
-    const { products } = await fetchProductsBySeries.execute({
+    const products = await fetchProductsBySeries.execute({
       series_id,
     })
 
-    return reply.status(201).send({
-      products,
-    })
+    return reply.status(201).send(products)
   } catch (err) {
     if (err instanceof SeriesNotExistsError) {
       return reply.status(404).send({ message: err.message })

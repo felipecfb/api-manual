@@ -7,10 +7,6 @@ interface IFetchProductsBySeriesUseCaseRequest {
   series_id: string
 }
 
-interface IFetchProductsBySeriesUseCaseResponse {
-  products: Products[]
-}
-
 class FetchProductsBySeriesUseCase {
   constructor(
     private seriesRepository: ISeriesRepository,
@@ -19,7 +15,7 @@ class FetchProductsBySeriesUseCase {
 
   async execute({
     series_id,
-  }: IFetchProductsBySeriesUseCaseRequest): Promise<IFetchProductsBySeriesUseCaseResponse> {
+  }: IFetchProductsBySeriesUseCaseRequest): Promise<Products[]> {
     const series = await this.seriesRepository.findById(series_id)
 
     if (!series) {
@@ -28,9 +24,7 @@ class FetchProductsBySeriesUseCase {
 
     const products = await this.productsRepository.findBySeriesId(series.id)
 
-    return {
-      products,
-    }
+    return products
   }
 }
 
