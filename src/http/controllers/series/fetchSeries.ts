@@ -25,7 +25,9 @@ export async function fetchSeries(
     return reply.status(200).send({
       series,
     })
-  } catch (err) {
-    console.log(err)
+  } catch (err: any) {
+    return reply.status(500).send({
+      message: err.message,
+    })
   }
 }

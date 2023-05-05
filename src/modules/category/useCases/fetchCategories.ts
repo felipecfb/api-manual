@@ -24,8 +24,6 @@ class FetchCategoriesUseCase {
       query,
     )
 
-    console.log(categories)
-
     return {
       categories,
       page,
