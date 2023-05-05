@@ -1,3 +1,4 @@
+import { SeriesNotExistsError } from '@/modules/products/errors/series-not-exists-error'
 import { makeFetchSeriesBySlugUseCase } from '@/modules/series/factories/makeFetchSeriesBySlugUseCase'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
@@ -19,10 +20,10 @@ export async function fetchSeriesBySlug(
       slug,
     })
 
-    return reply.status(200).send({
-      series,
-    })
+    return reply.status(200).send(series)
   } catch (err) {
-    console.log(err)
+    if (err instanceof SeriesNotExistsError) {
+      return reply.status(404).send({ message: err.message })
+    }
   }
 }
