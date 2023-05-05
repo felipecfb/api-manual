@@ -36,7 +36,6 @@ class PrismaCategoriesRepository implements ICategoriesRepository {
       where: {
         name: {
           contains: query?.toLowerCase(),
-          mode: 'insensitive',
         },
       },
       take: 20,
