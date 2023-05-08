@@ -30,6 +30,8 @@ jobs:
       - name: Run API
         run: |
           npm start
+        env:
+          JWT_SECRET: ${{ env.JWT_SECRET }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
