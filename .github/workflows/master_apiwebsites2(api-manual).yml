@@ -31,6 +31,7 @@ jobs:
         run: |
           npm start
         env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
           JWT_SECRET: ${{ env.JWT_SECRET }}
 
       - name: Upload artifact for deployment job
