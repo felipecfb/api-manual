@@ -27,6 +27,11 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Exibir valor da variável de ambiente
+        env:
+          MY_SECRET: ${{ secrets.JWT_SECRET }}
+        run: echo "O valor da variável MY_SECRET é: ${JWT_SECRET}"
+
       - name: Run API
         run: |
           npm start
