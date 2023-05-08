@@ -27,17 +27,12 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name: Exibir valor da variável de ambiente
-        env:
-          MY_SECRET: ${{ secrets.JWT_SECRET }}
-        run: echo "O valor da variável MY_SECRET é: ${JWT_SECRET}"
-
       - name: Run API
         run: |
           npm start
         env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
-          JWT_SECRET: ${{ env.JWT_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
