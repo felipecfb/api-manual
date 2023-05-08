@@ -32,7 +32,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
-          npm start
+          npm run start &
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
