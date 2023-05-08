@@ -28,11 +28,11 @@ jobs:
           npm run test --if-present
 
       - name: Run API
-        run: |
-          npm start
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          npm start
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
