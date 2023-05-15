@@ -9,23 +9,17 @@ export async function fetchCategories(
   reply: FastifyReply,
 ) {
   const fetchCategoriesQuerySchema = z.object({
-    page: z.coerce.string(),
     query: z.string().optional(),
   })
 
-  const { page, query } = fetchCategoriesQuerySchema.parse(request.query)
+  const { query } = fetchCategoriesQuerySchema.parse(request.query)
 
   try {
     const fetchCategoriesUseCase = makeFetchCategoriesUseCase()
 
-    const { categories } = await fetchCategoriesUseCase.execute({
-      page: Number(page),
-      query,
-    })
+    const response = await fetchCategoriesUseCase.execute({ query })
 
-    return reply.status(200).send({
-      categories,
-    })
+    return reply.status(200).send(response)
   } catch (err) {
     if (err instanceof CategoryAlreadyExistsError) {
       return reply.status(409).send({ message: err.message })

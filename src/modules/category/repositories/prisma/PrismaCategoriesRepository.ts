@@ -31,15 +31,13 @@ class PrismaCategoriesRepository implements ICategoriesRepository {
     return category
   }
 
-  async fetchCategories(page: number, query?: string): Promise<Category[]> {
+  async fetchCategories(query?: string): Promise<Category[]> {
     const categories = prisma.category.findMany({
       where: {
         name: {
           contains: query?.toLowerCase(),
         },
       },
-      take: 20,
-      skip: page ? (page - 1) * 20 : 0,
     })
 
     return categories

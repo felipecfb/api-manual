@@ -5,14 +5,14 @@ import { randomUUID } from 'crypto'
 class InMemoryCategoriesRepository implements ICategoriesRepository {
   public categories: Category[] = []
 
-  async fetchCategories(page: number, query: string): Promise<Category[]> {
+  async fetchCategories(query: string): Promise<Category[]> {
     if (query) {
       return this.categories.filter((category) =>
         category.name.toLowerCase().includes(query.toLowerCase()),
       )
     }
 
-    const categories = this.categories.splice((page - 1) * 20, page * 20)
+    const categories = this.categories
 
     return categories
   }
