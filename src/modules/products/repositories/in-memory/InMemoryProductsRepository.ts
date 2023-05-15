@@ -5,6 +5,20 @@ import { IProductsRepository } from '../IProductsRepository'
 class InMemoryProductsRepository implements IProductsRepository {
   public products: Products[] = []
 
+  async fetchProducts(
+    query?: string | undefined,
+  ): Promise<Products | Products[]> {
+    if (query) {
+      return this.products.filter((product) =>
+        product.name.toLowerCase().includes(query.toLowerCase()),
+      )
+    }
+
+    const products = this.products
+
+    return products
+  }
+
   async findBySeriesId(series_id: string): Promise<Products[]> {
     const products = this.products.filter(
       (product) => product.series_id === series_id,

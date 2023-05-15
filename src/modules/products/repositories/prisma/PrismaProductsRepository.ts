@@ -3,7 +3,21 @@ import { IProductsRepository } from '../IProductsRepository'
 import { prisma } from '@/lib/prisma'
 
 class PrismaProductsRepository implements IProductsRepository {
-  findBySeriesId(series_id: string): Promise<Products[]> {
+  async fetchProducts(
+    query?: string | undefined,
+  ): Promise<Products | Products[]> {
+    const products = await prisma.products.findMany({
+      where: {
+        name: {
+          contains: query?.toLowerCase(),
+        },
+      },
+    })
+
+    return products
+  }
+
+  async findBySeriesId(series_id: string): Promise<Products[]> {
     const products = prisma.products.findMany({
       where: {
         series_id,
