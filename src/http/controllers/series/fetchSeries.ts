@@ -8,23 +8,19 @@ export async function fetchSeries(
   reply: FastifyReply,
 ) {
   const fetchSeriesQuerySchema = z.object({
-    page: z.coerce.string(),
     query: z.string().optional(),
   })
 
-  const { page, query } = fetchSeriesQuerySchema.parse(request.query)
+  const { query } = fetchSeriesQuerySchema.parse(request.query)
 
   try {
     const fetchSeriesUseCase = makeFetchSeriesUseCase()
 
-    const { series } = await fetchSeriesUseCase.execute({
-      page: Number(page),
+    const response = await fetchSeriesUseCase.execute({
       query,
     })
 
-    return reply.status(200).send({
-      series,
-    })
+    return reply.status(200).send(response)
   } catch (err: any) {
     return reply.status(500).send({
       message: err.message,

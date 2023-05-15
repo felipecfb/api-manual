@@ -16,11 +16,11 @@ export async function fetchSeriesBySlug(
   try {
     const fetchSeriesBySlugUseCase = makeFetchSeriesBySlugUseCase()
 
-    const { series } = await fetchSeriesBySlugUseCase.execute({
+    const response = await fetchSeriesBySlugUseCase.execute({
       slug,
     })
 
-    return reply.status(200).send(series)
+    return reply.status(200).send(response)
   } catch (err) {
     if (err instanceof SeriesNotExistsError) {
       return reply.status(404).send({ message: err.message })

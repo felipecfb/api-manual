@@ -6,25 +6,19 @@ interface IFetchSeriesBySlugUseCaseRequest {
   slug: string
 }
 
-interface IFetchSeriesBySlugUseCaseResponse {
-  series: Series | null
-}
-
 class FetchSeriesBySlugUseCase {
   constructor(private seriesRepository: ISeriesRepository) {}
 
   async execute({
     slug,
-  }: IFetchSeriesBySlugUseCaseRequest): Promise<IFetchSeriesBySlugUseCaseResponse> {
+  }: IFetchSeriesBySlugUseCaseRequest): Promise<Series | null> {
     const series = await this.seriesRepository.findBySlug(slug)
 
     if (!series) {
       throw new SeriesNotExistsError()
     }
 
-    return {
-      series,
-    }
+    return series
   }
 }
 

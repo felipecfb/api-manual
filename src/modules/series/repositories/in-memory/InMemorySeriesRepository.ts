@@ -46,17 +46,14 @@ class InMemorySeriesRepository implements ISeriesRepository {
     return series
   }
 
-  async fetchSeries(
-    page: number,
-    query?: string | undefined,
-  ): Promise<Series[]> {
+  async fetchSeries(query?: string | undefined): Promise<Series[]> {
     if (query) {
       return this.series.filter((series) =>
         series.name.toLowerCase().includes(query.toLowerCase()),
       )
     }
 
-    const categories = this.series.splice((page - 1) * 20, page * 20)
+    const categories = this.series
 
     return categories
   }

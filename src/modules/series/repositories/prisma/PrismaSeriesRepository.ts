@@ -31,18 +31,13 @@ class PrismaSeriesRepository implements ISeriesRepository {
     return series
   }
 
-  async fetchSeries(
-    page: number,
-    query?: string | undefined,
-  ): Promise<Series[]> {
+  async fetchSeries(query?: string | undefined): Promise<Series[]> {
     const series = await prisma.series.findMany({
       where: {
         name: {
           contains: query?.toLowerCase(),
         },
       },
-      take: 20,
-      skip: page ? (page - 1) * 20 : 0,
     })
 
     return series
