@@ -14,6 +14,10 @@ class PrismaProductsRepository implements IProductsRepository {
       },
     })
 
+    if (products.length === 1) {
+      return products[0]
+    }
+
     return products
   }
 
